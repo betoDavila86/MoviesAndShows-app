@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Grid = (props) => {
+const LinearGrid = (props) => {
     console.log(props.detailInfo)
     const classes = useStyles();
 
@@ -64,4 +64,4 @@ const Grid = (props) => {
     );
 }
 
-export default Grid;
+export default LinearGrid;

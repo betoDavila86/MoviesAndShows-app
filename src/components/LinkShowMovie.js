@@ -10,8 +10,8 @@ const linkShowMovie = (props) => {
 
     return (
         <div style={styledLinks}>
-            <Link color='inherit' onClick={props.onOpenShows} >TV Shows</Link>
-            <Link color='inherit' onClick={props.onOpenMovies}>Movies</Link>
+            <Link color='inherit' onClick={props.onOpenShows} >Popular Shows</Link>
+            <Link color='inherit' onClick={props.onOpenMovies}>Popular Movies</Link>
         </div>
     );
 

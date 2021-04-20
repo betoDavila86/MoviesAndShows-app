@@ -5,15 +5,18 @@ import Spinner from './components/Spinner'
 import Carousel from './components/Carousel'
 import LinkShowMovie from './components/LinkShowMovie'
 import Detail from './components/Detail'
-import Grid from './components/Grid'
+import LinearGrid from './components/LinearGrid'
+import SimpleGrid from './components/SimpleGrid'
 
 import retrievePopularShows from './logic/retrieve-popular-shows'
 import retrievePopularMovies from './logic/retrieve-popular-movies'
 import retrieveDetail from './logic/retrieve-detail'
 import retrieveRecommendation from './logic/retrieve-recommendations'
+import retrieveAllTrending from './logic/retrieve-all-trending'
 
 function App() {
   const [results, setResults] = useState()
+  const [trending, setTrending] = useState()
   const [infoDetail, setInfoDetail] = useState()
   const [infoRecommendation, setInfoRecommendation] = useState()
   const [view, setView] = useState(true)
@@ -23,6 +26,11 @@ function App() {
   useEffect(() => {
     retrievePopularShows()
       .then(results => setResults(results))
+      .then(() => {
+        retrieveAllTrending()
+          .then(data => setTrending(data))
+          .catch(console.log)
+      })
       .catch(console.log)
   }, [])
 
@@ -71,10 +79,15 @@ function App() {
 
   }
 
+  const handleGoToLanding = () => {
+    setDetail(false)
+  }
+
   return (
     <div className="App">
-      <h1>Shows and Movies app <MovieIcon fontSize='large' /></h1>
+      <h1 style={{ cursor: 'pointer' }} onClick={handleGoToLanding}>Shows and Movies app <MovieIcon fontSize='large' /></h1>
       <LinkShowMovie onOpenShows={handleOpenShows} onOpenMovies={handleOpenMovies} />
+      {trending && !detail && <SimpleGrid onDetail={(type, id) => handleGoToDetail(type, id)} data={trending} />}
       {results ?
         <div>
           {view && <Carousel data={results} view={view} onClose={handleCloseModal} onDetail={(type, id) => handleGoToDetail(type, id)} />}
@@ -82,7 +95,7 @@ function App() {
             <div>
               <Detail detailInfo={infoDetail} />
               <h1>Alternatives</h1>
-              <Grid detailInfo={infoRecommendation} onDetail={(type, id) => handleGoToDetail(type, id)}/>
+              <LinearGrid detailInfo={infoRecommendation} onDetail={(type, id) => handleGoToDetail(type, id)} />
             </div>}
         </div> : <Spinner />}
     </div>

@@ -7,6 +7,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import noImg from '../assets/no-img.png'
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 550,
@@ -26,7 +28,7 @@ const Detail = (props) => {
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={`https://image.tmdb.org/t/p/w500${props.detailInfo.poster_path}`}
+                    image={props.detailInfo.poster_path !== null ? `https://image.tmdb.org/t/p/w500${props.detailInfo.poster_path}` : noImg}
                     title={props.detailInfo.original_title || props.detailInfo.name}
                 />
                 <CardContent style={{ overflow: 'scroll' }}>
