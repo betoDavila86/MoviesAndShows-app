@@ -3,7 +3,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+// import StarBorderIcon from '@material-ui/icons/StarBorder';
 import noImg from '../assets/no-img.png'
 
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'nowrap',
         // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
         transform: 'translateZ(0)',
+        cursor: 'pointer',
     },
     title: {
         color: theme.palette.primary.light,
@@ -37,7 +38,12 @@ const Grid = (props) => {
         <div className={classes.root}>
             <GridList className={classes.gridList} cols={3.5}>
                 {props.detailInfo.map((tile) => (
-                    <GridListTile key={tile.id}>
+                    <GridListTile key={tile.id} onClick={() => {
+                        if (tile.name)
+                            return props.onDetail('tv', tile.id)
+                        else if (tile.original_title)
+                            return props.onDetail('movie', tile.id)
+                    }}>
                         {tile.backdrop_path !== null ? <img src={`https://image.tmdb.org/t/p/w500${tile.backdrop_path}`} alt={tile.name || tile.original_title} /> : <img src={noImg} alt={tile.name || tile.original_title} />}
                         <GridListTileBar
                             title={tile.name || tile.original_title}
@@ -47,7 +53,7 @@ const Grid = (props) => {
                             }}
                             actionIcon={
                                 <IconButton aria-label={`star ${tile.name || tile.original_title}`}>
-                                    <StarBorderIcon className={classes.title} />
+                                    {/* <StarBorderIcon className={classes.title} /> */}
                                 </IconButton>
                             }
                         />

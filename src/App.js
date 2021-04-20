@@ -82,7 +82,7 @@ function App() {
             <div>
               <Detail detailInfo={infoDetail} />
               <h1>Alternatives</h1>
-              <Grid detailInfo={infoRecommendation} />
+              <Grid detailInfo={infoRecommendation} onDetail={(type, id) => handleGoToDetail(type, id)}/>
             </div>}
         </div> : <Spinner />}
     </div>
