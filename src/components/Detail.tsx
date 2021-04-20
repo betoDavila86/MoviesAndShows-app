@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         margin: '20px auto'
     },
     media: {
-        height: 300,
+        height: 250,
     },
 });
 
@@ -35,11 +35,11 @@ const Detail = ({ detailInfo }: Props) => {
                     image={poster_path !== null ? `https://image.tmdb.org/t/p/w500${poster_path}` : noImg}
                     title={original_title || name}
                 />
-                <CardContent style={{ overflow: 'scroll' }}>
+                <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {original_title || name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p">
+                    <Typography variant="body2" color="textSecondary" component="p" style={{ overflow: 'scroll' }}>
                         {overview}
                     </Typography>
                 </CardContent>
