@@ -5,7 +5,8 @@ const linkShowMovie = (props) => {
     const styledLinks = {
         display: 'flex',
         justifyContent: 'space-evenly',
-        cursor: 'pointer'
+        cursor: 'pointer',
+        marginBottom: '40px'
     }
 
     return (

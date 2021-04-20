@@ -24,7 +24,7 @@ const SimpleGrid = (props) => {
 
     return (
         <>
-            <h3 style={{ color: 'inherit', marginTop: '40px' }}>Trending Now</h3>
+            <h3 style={{ color: 'inherit', marginTop: '40px' }}>Week's Trend</h3>
             <div className={classes.root}>
                 <GridList cellHeight={160} className={classes.gridList} cols={3}>
                     {props.data.map((tile) => (

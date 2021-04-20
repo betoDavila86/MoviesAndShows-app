@@ -35,32 +35,36 @@ const LinearGrid = (props) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <GridList className={classes.gridList} cols={3.5}>
-                {props.detailInfo.map((tile) => (
-                    <GridListTile key={tile.id} onClick={() => {
-                        if (tile.name)
-                            return props.onDetail('tv', tile.id)
-                        else if (tile.original_title)
-                            return props.onDetail('movie', tile.id)
-                    }}>
-                        {tile.backdrop_path !== null ? <img src={`https://image.tmdb.org/t/p/w500${tile.backdrop_path}`} alt={tile.name || tile.original_title} /> : <img src={noImg} alt={tile.name || tile.original_title} />}
-                        <GridListTileBar
-                            title={tile.name || tile.original_title}
-                            classes={{
-                                root: classes.titleBar,
-                                title: classes.title,
-                            }}
-                            actionIcon={
-                                <IconButton aria-label={`star ${tile.name || tile.original_title}`}>
-                                    {/* <StarBorderIcon className={classes.title} /> */}
-                                </IconButton>
-                            }
-                        />
-                    </GridListTile>
-                ))}
-            </GridList>
-        </div>
+        <>
+            <div>
+                <h3>Similar titles</h3>
+            </div>
+            <div className={classes.root}>
+                <GridList className={classes.gridList} cols={3.5}>
+                    {props.detailInfo.map((tile) => (
+                        <GridListTile key={tile.id} onClick={() => {
+                            if (tile.name)
+                                return props.onDetail('tv', tile.id)
+                            else if (tile.original_title)
+                                return props.onDetail('movie', tile.id)
+                        }}>
+                            {tile.poster_path !== null ? <img src={`https://image.tmdb.org/t/p/w500${tile.poster_path}`} alt={tile.name || tile.original_title} /> : <img src={noImg} alt={tile.name || tile.original_title} />}
+                            <GridListTileBar
+                                title={tile.name || tile.original_title}
+                                classes={{
+                                    root: classes.titleBar,
+                                    title: classes.title,
+                                }}
+                                actionIcon={
+                                    <IconButton aria-label={`star ${tile.name || tile.original_title}`}>
+                                    </IconButton>
+                                }
+                            />
+                        </GridListTile>
+                    ))}
+                </GridList>
+            </div>
+        </>
     );
 }
 

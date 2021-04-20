@@ -9,7 +9,6 @@ const retrieveAllTrending = () => {
             const data = response.data.results
             return data
         })
-        .catch(error => 'There has been a problem :(')
 }
 
 export default retrieveAllTrending;

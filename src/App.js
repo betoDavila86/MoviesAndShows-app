@@ -7,6 +7,8 @@ import LinkShowMovie from './components/LinkShowMovie'
 import Detail from './components/Detail'
 import LinearGrid from './components/LinearGrid'
 import SimpleGrid from './components/SimpleGrid'
+import SimpleAlert from './components/SimpleAlert'
+import Footer from './components/Footer'
 
 import retrievePopularShows from './logic/retrieve-popular-shows'
 import retrievePopularMovies from './logic/retrieve-popular-movies'
@@ -22,21 +24,24 @@ function App() {
   const [view, setView] = useState(true)
   const [detail, setDetail] = useState(false)
   const [error, setError] = useState(false)
+  // const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    retrievePopularShows()
-      .then(results => setResults(results))
-      .then(() => {
-        retrieveAllTrending()
-          .then(data => setTrending(data))
-          .catch(console.log)
+    retrieveAllTrending()
+      .then(data => {
+        setTrending(data)
+        // setIsLoading(false)
       })
-      .catch(console.log)
+      .catch(error => feedbackMessage())
   }, [])
 
-  // const feedbackMessage = () => {
-  //   setError(true)
-  // }
+  const feedbackMessage = () => {
+    setError(true);
+    setTimeout(() => {
+      setError(false)
+    }, 5000);
+  }
+
 
   const handleOpenShows = () => {
     retrievePopularShows()
@@ -45,7 +50,7 @@ function App() {
         setView(true)
         setDetail(false)
       })
-      .catch(console.log)
+      .catch(error => feedbackMessage())
   }
 
   const handleOpenMovies = () => {
@@ -55,7 +60,7 @@ function App() {
         setView(true)
         setDetail(false)
       })
-      .catch(console.log)
+      .catch(error => feedbackMessage())
   }
 
   const handleCloseModal = () => {
@@ -74,8 +79,9 @@ function App() {
           .then(results => {
             setInfoRecommendation(results)
           })
+          .catch(error => feedbackMessage())
       })
-      .catch(console.log)
+      .catch(error => feedbackMessage())
 
   }
 
@@ -87,17 +93,15 @@ function App() {
     <div className="App">
       <h1 style={{ cursor: 'pointer' }} onClick={handleGoToLanding}>Shows and Movies app <MovieIcon fontSize='large' /></h1>
       <LinkShowMovie onOpenShows={handleOpenShows} onOpenMovies={handleOpenMovies} />
+      {error && <SimpleAlert severity='error' >There was an error :(</SimpleAlert>}
       {trending && !detail && <SimpleGrid onDetail={(type, id) => handleGoToDetail(type, id)} data={trending} />}
-      {results ?
+      {results && view && <Carousel data={results} view={view} onClose={handleCloseModal} onDetail={(type, id) => handleGoToDetail(type, id)} />}
+      {detail && infoDetail && infoRecommendation &&
         <div>
-          {view && <Carousel data={results} view={view} onClose={handleCloseModal} onDetail={(type, id) => handleGoToDetail(type, id)} />}
-          {detail && infoDetail && infoRecommendation &&
-            <div>
-              <Detail detailInfo={infoDetail} />
-              <h1>Alternatives</h1>
-              <LinearGrid detailInfo={infoRecommendation} onDetail={(type, id) => handleGoToDetail(type, id)} />
-            </div>}
-        </div> : <Spinner />}
+          <Detail detailInfo={infoDetail} />
+          {infoRecommendation.length ? <LinearGrid detailInfo={infoRecommendation} onDetail={(type, id) => handleGoToDetail(type, id)} /> : <SimpleAlert severity='info' >Sorry, no alternatives found for this title.</SimpleAlert>}
+        </div>}
+        <Footer />
     </div>
 
   );

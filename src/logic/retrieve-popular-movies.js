@@ -9,7 +9,6 @@ const retrievePopularMovies = () => {
             const results = response.data.results
             return results
         })
-        .catch(error => 'There has been a problem :(')
 }
 
 export default retrievePopularMovies;

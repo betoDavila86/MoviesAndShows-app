@@ -8,13 +8,13 @@ const Carousel = ({ data, view, onClose, onDetail }) => {
     // const [open, setOpen] = useState(true)
 
     return (
-        <div style={{ position: 'relative', width: '90%', height: 500 }}>
+        <div style={{ position: 'relative', width: '100%', height: 500 }}>
             <AutoRotatingCarousel
                 // label='More...'
                 open={view}
                 onClose={onClose}
                 style={{ position: 'absolute' }}
-                interval={5000}
+                interval={3000}
             >
                 {data.map(result => {
                     return <Slide
