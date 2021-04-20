@@ -4,6 +4,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import noImg from '../assets/no-img.png'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -37,7 +38,7 @@ const Grid = (props) => {
             <GridList className={classes.gridList} cols={3.5}>
                 {props.detailInfo.map((tile) => (
                     <GridListTile key={tile.id}>
-                        <img src={`https://image.tmdb.org/t/p/w500${tile.backdrop_path}`} alt={tile.name || tile.original_title} />
+                        {tile.backdrop_path !== null ? <img src={`https://image.tmdb.org/t/p/w500${tile.backdrop_path}`} alt={tile.name || tile.original_title} /> : <img src={noImg} alt={tile.name || tile.original_title} />}
                         <GridListTileBar
                             title={tile.name || tile.original_title}
                             classes={{
