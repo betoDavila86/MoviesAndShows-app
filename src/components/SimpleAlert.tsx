@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type Props = {
-  children: any,
+  children: String,
   severity: String
 }
 

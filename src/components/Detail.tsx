@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 
 import noImg from '../assets/no-img.png'
 
+export type FixMeLater = any;
+
 const useStyles = makeStyles({
     root: {
         maxWidth: 550,

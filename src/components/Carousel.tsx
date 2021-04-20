@@ -5,6 +5,8 @@ import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
 import { Slide } from 'material-auto-rotating-carousel';
 import { grey } from '@material-ui/core/colors';
 
+export type FixMeLater = any;
+
 type Props = {
     data: any[],
     view: Boolean,

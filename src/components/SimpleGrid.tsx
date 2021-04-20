@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 
+export type FixMeLater = any;
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',

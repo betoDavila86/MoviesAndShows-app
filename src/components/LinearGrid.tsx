@@ -7,6 +7,8 @@ import IconButton from '@material-ui/core/IconButton';
 // import StarBorderIcon from '@material-ui/icons/StarBorder';
 import noImg from '../assets/no-img.png'
 
+export type FixMeLater = any;
+
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
