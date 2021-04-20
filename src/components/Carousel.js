@@ -3,9 +3,6 @@ import { Slide } from 'material-auto-rotating-carousel';
 const { grey } = require('@material-ui/core/colors');
 
 const Carousel = ({ data, view, onClose, onDetail }) => {
-    console.log(data)
-    // const Button = require('@material-ui/core/Button').default;
-    // const [open, setOpen] = useState(true)
 
     return (
         <div style={{ position: 'relative', width: '100%', height: 500 }}>

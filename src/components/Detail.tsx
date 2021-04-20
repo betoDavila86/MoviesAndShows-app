@@ -19,24 +19,28 @@ const useStyles = makeStyles({
     },
 });
 
-const Detail = (props) => {
+type Props = {
+    detailInfo: any
+}
+
+const Detail = ({ detailInfo }: Props) => {
     const classes = useStyles();
-    //   console.log(props.detailInfo)
+    const { poster_path, original_title, name, overview } = detailInfo
 
     return (
         <Card className={classes.root}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={props.detailInfo.poster_path !== null ? `https://image.tmdb.org/t/p/w500${props.detailInfo.poster_path}` : noImg}
-                    title={props.detailInfo.original_title || props.detailInfo.name}
+                    image={poster_path !== null ? `https://image.tmdb.org/t/p/w500${poster_path}` : noImg}
+                    title={original_title || name}
                 />
                 <CardContent style={{ overflow: 'scroll' }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {props.detailInfo.original_title || props.detailInfo.name}
+                        {original_title || name}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.detailInfo.overview}
+                        {overview}
                     </Typography>
                 </CardContent>
             </CardActionArea>

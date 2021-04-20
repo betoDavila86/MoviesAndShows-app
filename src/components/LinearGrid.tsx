@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -12,8 +13,7 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-        // marginBottom: '32px'
+        backgroundColor: theme.palette.background.paper
     },
     gridList: {
         flexWrap: 'nowrap',
@@ -30,8 +30,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const LinearGrid = (props) => {
-    console.log(props.detailInfo)
+type Props = {
+    detailInfo: any,
+    onDetail: MouseEventHandler
+}
+
+const LinearGrid = ({ detailInfo, onDetail }: Props) => {
+    // console.log(detailInfo)
     const classes = useStyles();
 
     return (
@@ -41,14 +46,18 @@ const LinearGrid = (props) => {
             </div>
             <div className={classes.root}>
                 <GridList className={classes.gridList} cols={3.5}>
-                    {props.detailInfo.map((tile) => (
+                    {detailInfo.map((tile: any) => (
                         <GridListTile key={tile.id} onClick={() => {
                             if (tile.name)
-                                return props.onDetail('tv', tile.id)
+                                // @ts-ignore
+                                return onDetail('tv', tile.id)
                             else if (tile.original_title)
-                                return props.onDetail('movie', tile.id)
+                                // @ts-ignore
+                                return onDetail('movie', tile.id)
                         }}>
-                            {tile.poster_path !== null ? <img src={`https://image.tmdb.org/t/p/w500${tile.poster_path}`} alt={tile.name || tile.original_title} /> : <img src={noImg} alt={tile.name || tile.original_title} />}
+                            {tile.poster_path !== null ?
+                                <img src={`https://image.tmdb.org/t/p/w500${tile.poster_path}`} alt={tile.name || tile.original_title} /> :
+                                <img src={noImg} alt={tile.name || tile.original_title} />}
                             <GridListTileBar
                                 title={tile.name || tile.original_title}
                                 classes={{
