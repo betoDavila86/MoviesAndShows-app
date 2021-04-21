@@ -13,11 +13,11 @@ export type FixMeLater = any;
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 550,
-        margin: '20px auto'
+        maxWidth: 750,
+        margin: '35px auto 25px auto'
     },
     media: {
-        height: 250,
+        height: 275,
     },
 });
 
@@ -41,7 +41,7 @@ const Detail = ({ detailInfo }: Props) => {
                     <Typography gutterBottom variant="h5" component="h2">
                         {original_title || name}
                     </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" style={{ overflow: 'scroll' }}>
+                    <Typography variant="body2" color="textSecondary" component="p">
                         {overview}
                     </Typography>
                 </CardContent>

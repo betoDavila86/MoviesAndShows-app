@@ -111,12 +111,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="d-flex justify-content-around align-items-center bg-dark text-light py-2">
+      <div className="d-flex justify-content-around align-items-center bg-dark py-2">
         <h1 style={{ cursor: 'pointer' }} onClick={handleGoToLanding}>Shows and Movies app <MovieIcon fontSize='large' /></h1>
         <LinkShowMovie onOpenShows={handleOpenShows} onOpenMovies={handleOpenMovies} />
       </div>
       {error && <SimpleAlert severity='error' >There was an error :(</SimpleAlert>}
-      <div className="d-flex justify-content-evenly">
+      <div className="d-flex justify-content-between">
         {genres && !detail && <ListGenres genres={genres} onGenre={(id) => handleMoviesWithGenres(id)} />}
         {trending && !detail && <SimpleGrid onDetail={(type, id) => handleGoToDetail(type, id)} data={trending} />}
       </div>

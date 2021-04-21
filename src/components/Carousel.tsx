@@ -29,7 +29,7 @@ const Carousel = ({ data, view, onClose, onDetail }: Props) => {
                     return <Slide
                         key={result.id}
                         media={<img src={`https://image.tmdb.org/t/p/w500${result.backdrop_path}`} alt='img' />}
-                        mediaBackgroundStyle={{ backgroundColor: grey[600] }}
+                        mediaBackgroundStyle={{ backgroundColor: grey[700] }}
                         style={{ backgroundColor: grey[900], cursor: 'pointer' }}
                         title={result.name || result.original_title}
                         subtitle={<p>Vote avg.: {result.vote_average}</p>}

@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react';
 
 type Props = {
     genres: any[],
@@ -8,9 +8,9 @@ type Props = {
 const listGenre = ({ genres, onGenre }: Props) => {
 
     return (
-        <div className="list-group list-group-flush col-2 my-4">
+        <div className="list-group list-group-flush col-1.5 m-4">
             {genres.map(genre => {
-                return <button key={genre.id} onClick={() => onGenre(genre.id)} type="button" className="list-group-item list-group-item-action">
+                return <button key={genre.id} onClick={() => onGenre(genre.id)} type="button" className="list-group-item list-group-item-action bg-dark text-white border-white">
                     {genre.name}
                 </button>
             })}
