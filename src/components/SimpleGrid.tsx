@@ -8,11 +8,10 @@ export type FixMeLater = any;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
+        flexDirection: 'column',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
-        marginTop: '25px',
+        marginTop: '35px',
     },
     gridList: {
         width: 625,
@@ -31,8 +30,8 @@ const SimpleGrid = ({ data, onDetail }: Props) => {
 
     return (
         <>
-            <h3 style={{ color: 'inherit', marginTop: '40px' }}>Week's Trend</h3>
             <div className={classes.root}>
+                <h3 style={{ color: 'inherit'}}>Week's Trend</h3>
                 <GridList cellHeight={160} className={classes.gridList} cols={3}>
                     {data.map((tile) => (
                         <GridListTile onClick={() => {

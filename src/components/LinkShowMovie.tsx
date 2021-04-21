@@ -10,15 +10,15 @@ const linkShowMovie = ({ onOpenShows, onOpenMovies }: Props) => {
 
     const styledLinksDiv = {
         display: 'flex',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-around',
         cursor: 'pointer',
-        marginBottom: '40px'
+        width: '55%'
     }
 
     return (
         <div style={styledLinksDiv}>
-            <Link style={{ fontSize: '25px' }} color='inherit' onClick={onOpenShows} >Popular Shows</Link>
-            <Link style={{ fontSize: '25px' }} color='inherit' onClick={onOpenMovies}>Popular Movies</Link>
+            <Link style={{ fontSize: '30px' }} color='inherit' onClick={onOpenShows} >Popular Shows</Link>
+            <Link style={{ fontSize: '30px' }} color='inherit' onClick={onOpenMovies}>Popular Movies</Link>
         </div>
     );
 

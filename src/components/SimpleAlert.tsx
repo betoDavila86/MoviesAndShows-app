@@ -3,11 +3,11 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '60%',
+    width: '50%',
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
-    margin: '0 auto',
+    margin: '42px auto',
     fontSize: '2rem'
   },
 }));
