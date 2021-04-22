@@ -3,7 +3,7 @@ import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '50%',
+    width: '40%',
     '& > * + *': {
       marginTop: theme.spacing(2),
     },

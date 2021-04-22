@@ -32,7 +32,7 @@ const Carousel = ({ data, view, onClose, onDetail }: Props) => {
                         mediaBackgroundStyle={{ backgroundColor: grey[700] }}
                         style={{ backgroundColor: grey[900], cursor: 'pointer' }}
                         title={result.name || result.original_title}
-                        subtitle={<p>Vote avg.: {result.vote_average}</p>}
+                        subtitle={`Vote avg.: ${result.vote_average}`}
                         onClick={() => {
                             if (result.name)
                                 // @ts-ignore

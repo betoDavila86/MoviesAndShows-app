@@ -19,16 +19,21 @@
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-swipeable-views": "^0.13.9",
+    "react-test-renderer": "^17.0.2",
+    "redux": "^4.0.5",
+    "regenerator-runtime": "^0.13.7",
     "typescript": "^4.2.4",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest src/logic",
+    "test:coverage": "npx nyc --reporter=html --reporter=text jest src/logic/**/*.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -48,5 +53,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["./src/setupTests.js"] 
   }
 }

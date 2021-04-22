@@ -36,7 +36,7 @@ const SimpleGrid = ({ data, onDetail }: Props) => {
                 <h3 style={{ textAlign: 'left' }}>Week's Trend</h3>
                 <GridList cellHeight={200} className={classes.gridList} cols={3}>
                     {data.map((tile) => (
-                        <Tooltip title={tile.original_title || tile.name} placement='bottom'>
+                        <Tooltip key={tile.id} title={tile.original_title || tile.name} placement='bottom'>
                             <GridListTile onClick={() => {
                                 if (tile.name)
                                     // @ts-ignore
@@ -44,7 +44,7 @@ const SimpleGrid = ({ data, onDetail }: Props) => {
                                 else if (tile.original_title)
                                     // @ts-ignore
                                     return onDetail('movie', tile.id)
-                            }} key={tile.id} cols={tile.cols || 1}>
+                            }} cols={tile.cols || 1}>
                                 <img src={`https://image.tmdb.org/t/p/w500${tile.backdrop_path}`} alt={tile.name || tile.original_title} />
                             </GridListTile>
                         </Tooltip>

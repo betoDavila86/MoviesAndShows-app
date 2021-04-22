@@ -1,15 +1,16 @@
 import './App.css';
-import { useState, useEffect } from 'react'
-import MovieIcon from '@material-ui/icons/Movie';
+import { useState, useEffect } from 'react';
 import Spinner from './components/Spinner'
-import Carousel from './components/Carousel'
-import LinkShowMovie from './components/LinkShowMovie'
+import Carousel from './components/Carousel';
 import Detail from './components/Detail'
 import LinearGrid from './components/LinearGrid'
 import SimpleGrid from './components/SimpleGrid'
 import SimpleAlert from './components/SimpleAlert'
 import Footer from './components/Footer'
 import ListGenres from './components/ListGenres'
+import LinkShowMovie from './components/LinkShowMovie'
+import MovieIcon from '@material-ui/icons/Movie';
+// import Header from './components/Header'
 
 import retrievePopularShows from './logic/retrieve-popular-shows'
 import retrievePopularMovies from './logic/retrieve-popular-movies'
@@ -28,15 +29,19 @@ function App() {
   const [view, setView] = useState(true)
   const [detail, setDetail] = useState(false)
   const [error, setError] = useState(false)
-  // const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    setIsLoading(true)
     retrieveAllTrending()
       .then(data => {
+        setIsLoading(false)
         setTrending(data)
-        // setIsLoading(false)
       })
-      .catch(error => feedbackMessage())
+      .catch(error => {
+        setIsLoading(false)
+        feedbackMessage()
+      })
   }, [])
 
   useEffect(() => {
@@ -54,13 +59,18 @@ function App() {
 
 
   const handleOpenShows = () => {
+    setIsLoading(true)
     retrievePopularShows()
       .then(results => {
         setResults(results)
+        setIsLoading(false)
         setView(true)
         setDetail(false)
       })
-      .catch(error => feedbackMessage())
+      .catch(error => {
+        setIsLoading(false)
+        feedbackMessage()
+      })
   }
 
   const handleOpenMovies = () => {
@@ -109,8 +119,21 @@ function App() {
     setDetail(false)
   }
 
+  let simpleGrid;
+  if (isLoading)
+    simpleGrid = <Spinner />
+  else
+    simpleGrid = <SimpleGrid onDetail={(type, id) => handleGoToDetail(type, id)} data={trending} />
+
+  let carousel;
+  if (isLoading)
+    carousel = <Spinner />
+  else
+    carousel = <Carousel data={results} view={view} onClose={handleCloseModal} onDetail={(type, id) => handleGoToDetail(type, id)} />
+
   return (
     <div className="App">
+      {/* <Header onOpenShows={handleOpenShows} onOpenMovies={handleOpenMovies} onGoToLanding={handleGoToLanding} /> */}
       <div className="d-flex justify-content-around align-items-center bg-dark py-2">
         <h1 style={{ cursor: 'pointer' }} onClick={handleGoToLanding}>Shows and Movies app <MovieIcon fontSize='large' /></h1>
         <LinkShowMovie onOpenShows={handleOpenShows} onOpenMovies={handleOpenMovies} />
@@ -118,9 +141,9 @@ function App() {
       {error && <SimpleAlert severity='error' >There was an error :(</SimpleAlert>}
       <div className="d-flex justify-content-between">
         {genres && !detail && <ListGenres genres={genres} onGenre={(id) => handleMoviesWithGenres(id)} />}
-        {trending && !detail && <SimpleGrid onDetail={(type, id) => handleGoToDetail(type, id)} data={trending} />}
+        {trending && !detail && simpleGrid}
       </div>
-      {results && view && <Carousel data={results} view={view} onClose={handleCloseModal} onDetail={(type, id) => handleGoToDetail(type, id)} />}
+      {results && view && carousel}
       {detail && infoDetail && infoRecommendation &&
         <div>
           <Detail detailInfo={infoDetail} />
